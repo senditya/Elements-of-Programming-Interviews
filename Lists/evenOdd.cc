@@ -3,10 +3,12 @@
 
 using namespace std;
 
-void evenOdd(List *list, List *even, List *odd)
+void evenOdd(List *list)
 {
 	if(list->head != NULL)
 	{
+		List *even = new List(), *odd = new List();
+
 		even->head = list->head;
 		odd->head = (list->head)->next;
 
@@ -15,7 +17,28 @@ void evenOdd(List *list, List *even, List *odd)
 			Node *ptr = (odd->head)->next;
 			Node *even_ptr = even->head, *odd_ptr = odd->head;
 
-			
+			while(ptr != NULL && ptr->next != NULL)
+			{
+				even_ptr->next = ptr;
+				odd_ptr->next = ptr->next;
+
+				ptr = (ptr->next)->next;
+				even_ptr = even_ptr->next;
+				odd_ptr = odd_ptr->next;
+			}
+
+			if(ptr == NULL)
+			{
+				even_ptr->next = odd->head;
+				odd_ptr->next = NULL;
+			}
+
+			else
+			{
+				even_ptr->next = ptr;
+				(even_ptr->next)->next = odd->head;
+				odd_ptr->next = NULL;
+			}
 		}
 	}
 }
@@ -39,13 +62,11 @@ int main()
 			list->insert(x);
 		}
 
+		list->print();
 
-		List *even = new List(), *odd = new List();
-		evenOdd(list, even, odd);
+		evenOdd(list);
 
 		list->print();
-		even->print();
-		odd->print();
 		cout << endl;
 	}
 }
