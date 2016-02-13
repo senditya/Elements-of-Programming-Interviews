@@ -20,12 +20,16 @@ class Treeode
 		Treeode *left;
 		Treeode *right;
 		Treeode *level_next;
+		Treeode *next;
+		Treeode *prev;
 
 		Treeode()
 		{
 			left = NULL;
 			right = NULL;
 			level_next = NULL;
+			next = NULL;
+			prev = NULL;
 		}
 };
 
