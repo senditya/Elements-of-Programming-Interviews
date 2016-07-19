@@ -1,11 +1,27 @@
 #include <iostream>
 #include "list.h"
+#include <utility>
 
 using namespace std;
 
+void print(List< pair<int,int> > *l)
+{
+	Node< pair<int,int> > *ptr = l->head;
+
+	cout << "START -> ";
+
+	while(ptr != NULL)
+	{
+		cout << "(" << (ptr->data).first << "," << (ptr->data).second << ") -> ";
+		ptr = ptr->next;
+	}
+
+	cout << "END" << endl;
+}
+
 int main()
 {
-	List *l = new List();
+	List< pair<int,int> > *l = new List< pair<int,int> >();
 	
 	// char n = 'a'+5;
 	// l->insert(n);
@@ -19,10 +35,21 @@ int main()
 	// n = 'a'+4;
 	// l->insert(n);
 
-	int a[] = {1,5,4,1,3,6};
-	l->construct(a, 6);
+	// int a[] = {1,5,4,1,3,6};
+	// l->construct(a, 6);
 
-	l->print();
+	vector< pair<int,int> > pairs;
+	pairs.push_back(make_pair(1,2));
+	pairs.push_back(make_pair(3,4));
+	pairs.push_back(make_pair(5,6));
+
+	l->construct(pairs);
+
+	print(l);
+
+	//cout << pairs[0] << endl;
+
+	//l->print();
 
 	// Node *ptr = l->head;
 	// for(int i=0; i<20; i++)
@@ -33,5 +60,5 @@ int main()
 	// cout << endl;
 
 	l->clear();
-	l->print();
+	//l->print();
 }
